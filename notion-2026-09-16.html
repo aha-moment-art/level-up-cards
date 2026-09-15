@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f7fb">
+<title>9月16日 · 翻转单词卡</title>
+<style>:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#23364b;background:#f4f7fb;font-size:16px;line-height:1.6;color-scheme:light;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.4}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid #81a9dc;outline-offset:4px}[hidden]{display:none!important}
+.study{width:min(100%,650px);margin:auto;padding:22px 24px;display:flex;flex-direction:column;gap:14px}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{font-size:12px;letter-spacing:.14em;color:#7489a2;font-weight:700}.heading{font-size:23px;margin:2px 0 0;line-height:1.3}.accents{display:flex;padding:4px;background:#e5edf7;border-radius:12px;flex-shrink:0}.accents button{border:0;border-radius:9px;background:transparent;color:#62768e;padding:8px 14px;font-size:14px;font-weight:600;min-height:42px}.accents button[aria-pressed=true]{background:white;color:#2862a3;box-shadow:0 2px 6px #25497812}
+.progress-copy{display:flex;justify-content:space-between;gap:12px;color:#77879b;font-size:13px;margin:0 0 5px}.progress-track{height:3px;background:#e0e8f1;border-radius:8px;overflow:hidden}.progress-fill{height:100%;background:#7198c8;transition:width .2s}
+.deck{position:relative;perspective:1400px;min-height:360px;height:420px;touch-action:pan-y pinch-zoom;overscroll-behavior-x:contain;user-select:none;-webkit-user-select:none;border-radius:24px;outline-offset:5px}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.65,.2,1)}.flip-inner.is-flipped{transform:rotateY(180deg)}.flip-inner.changing{transition:none}
+.card-face{position:absolute;inset:0;display:flex;flex-direction:column;border:1px solid #dce6f2;border-radius:24px;padding:24px 28px;background:#fff;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 12px 30px #3757780d;cursor:pointer;overflow-y:auto;touch-action:pan-y pinch-zoom;overscroll-behavior-y:contain}.card-back{transform:rotateY(180deg);background:#fdfefe;border-color:#bcd1ea}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#8597ad;flex-shrink:0}.badge{background:#eef4fc;color:#6888af;padding:3px 9px;border-radius:20px}
+.word-head{display:flex;flex:1;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:15px 0}.word{font-size:clamp(32px,7.5vw,46px);letter-spacing:-.025em;font-weight:650;line-height:1.3;margin:0;max-width:100%}.word-button{font:inherit;letter-spacing:inherit;color:inherit;border:0;background:transparent;padding:4px;border-radius:8px;max-width:100%;overflow-wrap:anywhere}.word-button:hover{color:#3974b7}.word-button:active{background:#edf4fe}.sound-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px}.phonetic{font-family:Arial,sans-serif;color:#71849d;font-size:17px}.speaker{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:1px solid #d8e6f8;background:#edf4fe;color:#497fbe;flex-shrink:0}.speaker svg{height:22px;width:22px}.speaker[data-playing=true]{background:#d6e8ff;border-color:#8ab3e5}.audio-status{font-size:12px;color:#8c9aaf;margin:12px 0 0;min-height:20px}.face-hint{font-size:13px;color:#8b9bb0;text-align:center;margin:6px 0 0;flex-shrink:0}
+.example-content{margin:auto 0;padding:20px 0}.example{font-size:22px;line-height:1.65;margin:0;overflow-wrap:anywhere;color:#2a4768}.example strong{color:#316bad;font-weight:650}.translation{font-size:15px;line-height:1.8;color:#7b8da3;margin:15px 0 0}.extra{font-size:14px;color:#7d8fa5;margin-top:16px}.extra summary{cursor:pointer;padding:6px 0;min-height:38px}.extra p{margin:6px 0}.extra[open]{border-top:1px solid #e5edf6}.collocation{color:#4c77a8}.note{font-size:13px}
+.actions{display:flex;gap:9px;align-items:center}.ratings{display:grid;grid-template-columns:1fr 1fr;gap:9px;flex:1}.ratings button,.flip-button{font-size:14px;min-height:44px;padding:9px 12px;border:1px solid #dce5f0;border-radius:11px;background:white;color:#72839a}.ratings button[aria-pressed=true]{border-color:#729acc;color:#326aab;background:#e9f2fd}.flip-button{border-color:#3974b7;background:#3974b7;color:#fff;min-width:116px}.navigation{display:flex;align-items:center;justify-content:space-between;gap:12px}.nav-button{background:transparent;border:0;color:#6283aa;padding:6px 0;font-size:14px;min-height:40px}.nav-button:last-child{text-align:right}.finish{display:block;margin:0 auto;border:0;background:none;color:#527dad;min-height:40px;font-size:14px}.storage-note{font-size:12px;color:#93a2b5;text-align:center;margin:0}.notice{font-size:12px;min-height:20px;margin:0;text-align:center;color:#7d8fa4}
+.summary-card{text-align:center;background:#fff;border:1px solid #dce6f2;border-radius:24px;padding:35px 25px}.summary-card h2{font-size:24px;margin:0}.summary-card p{font-size:15px;color:#7f91a6}.summary-counts{display:flex;justify-content:center;gap:45px;margin:25px 0}.summary-counts strong{display:block;font-size:29px;color:#396795}.summary-counts span{font-size:13px;color:#7e91a7}.summary-action{width:100%;border:0;border-radius:12px;background:#3974b7;color:white;min-height:46px;font-size:15px}.text-button{border:0;background:transparent;color:#7b91aa;min-height:44px;font-size:14px;margin-top:8px}.error{padding:16px;color:#99603e;background:#fff5ed;border-radius:12px}
+.deck.enter-next{animation:from-left .22s ease-out}.deck.enter-previous{animation:from-right .22s ease-out}@keyframes from-left{from{opacity:.3;transform:translateX(-25px)}to{opacity:1;transform:translateX(0)}}@keyframes from-right{from{opacity:.3;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:480px){.study{padding:16px;gap:12px}.heading{font-size:20px}.accents button{padding:7px 12px}.deck{height:420px;min-height:350px}.card-face{padding:20px 22px}.example{font-size:21px}.flip-button{min-width:106px}.ratings button{padding-inline:8px}}
+@media(max-height:620px){.study{padding:10px 14px;gap:6px;height:100svh;min-height:290px}.eyebrow,.storage-note,.face-hint,.card-front .card-meta{display:none}.heading{font-size:18px}.accents{padding:2px}.accents button{padding:4px 11px;min-height:34px}.deck{min-height:130px;height:auto;flex:1}.card-face{padding:12px 20px;border-radius:17px}.word-head{padding:0}.word{font-size:32px}.sound-row{margin-top:4px}.speaker{width:36px;height:36px}.audio-status{margin:2px 0 0;font-size:12px;min-height:18px}.phonetic{font-size:16px}.progress-copy{font-size:12px;margin-bottom:3px}.example-content{padding:6px 0}.example{font-size:18px}.translation{font-size:14px;margin-top:8px}.extra{margin-top:8px}.card-back .card-meta{font-size:12px}.actions{gap:8px}.ratings button,.flip-button{min-height:36px;padding:5px 9px}.nav-button{font-size:13px;min-height:30px;padding:1px 0}.finish{min-height:28px}.notice{position:absolute;left:15%;right:15%;bottom:12px;pointer-events:none}.notice:empty{display:none}.summary-card{padding:16px 20px;overflow:auto}.summary-counts{margin:12px 0}}
+/* Notion can constrain an embedded card below a normal phone viewport. */
+@media(max-width:300px){.study{padding:8px;gap:6px;height:auto;min-width:0}.topline{flex-wrap:wrap;gap:6px}.heading{font-size:16px;overflow-wrap:anywhere}.accents{margin-left:auto}.accents button{min-height:36px}.progress-copy{flex-wrap:wrap;gap:0 8px}.deck{flex:none;height:240px;min-height:0}.card-face{padding:12px;border-radius:16px}.card-meta{flex-wrap:wrap;gap:4px}.word{font-size:28px}.sound-row{flex-wrap:wrap;gap:6px}.phonetic{overflow-wrap:anywhere;max-width:100%}.audio-status{font-size:12px}.example{font-size:17px}.translation{font-size:14px}.actions{flex-wrap:wrap}.ratings{flex-basis:100%;min-width:0;gap:6px}.ratings button{min-width:0;min-height:40px;padding:5px}.flip-button{width:100%;min-height:40px}.navigation{gap:8px}.nav-button{flex:1;min-width:0;min-height:40px;font-size:13px}.notice{position:static;font-size:12px;min-height:0}.notice:empty{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* A visible face is painted directly, including inside mobile WebViews. */
+.flip-inner,.flip-inner.is-flipped{transform:none;transform-style:flat;transition:none}
+.card-face,.card-back{transform:none;backface-visibility:visible;-webkit-backface-visibility:visible}
+.card-face[aria-hidden="true"]{visibility:hidden;pointer-events:none}
+.card-face[aria-hidden="false"]{visibility:visible;animation:card-turn .28s ease-out}
+.flip-inner.changing .card-face{animation:none}
+@keyframes card-turn{from{transform:perspective(1000px) rotateY(-70deg);opacity:.3}to{transform:perspective(1000px) rotateY(0);opacity:1}}
+.audio-progress{width:78px;height:3px;margin:4px auto 0;accent-color:#7198c8;display:block}
+#boot-status{font-size:13px;text-align:center;color:#667b92}
+</style>
+
+
+</head>
+<body>
+<main class="study">
+<header class="topline"><div><div class="eyebrow">DAILY WORDS</div><h1 class="heading">9月16日 · 50词</h1></div><div class="accents" role="group" aria-label="发音选择"><button type="button" data-accent="uk" aria-pressed="true">英音</button><button type="button" data-accent="us" aria-pressed="false">美音</button></div></header>
+<div><div class="progress-copy"><span id="round-position">今日单词 · 1 / 50</span><span id="rating-count">记住 0 · 还不熟 0</span></div><div id="progress" class="progress-track" role="progressbar" aria-label="卡片位置" aria-valuemin="0" aria-valuemax="50" aria-valuenow="1"><div id="progress-fill" class="progress-fill"></div></div></div>
+<div id="word-card" class="deck" tabindex="0" role="group" aria-label="单词卡">
+<div id="flip-inner" class="flip-inner">
+<section id="card-front" class="card-face card-front" aria-hidden="false">
+<div class="card-meta"><span id="word-number">原序号 001</span><span id="word-badge" class="badge">单词</span></div>
+<div class="word-head"><h2 class="word" lang="en"><button id="word" class="word-button" type="button" aria-describedby="phonetic">cancel</button></h2><div class="sound-row"><span id="phonetic" class="phonetic">/'kænsl/</span><button id="speaker" class="speaker" type="button" aria-label="播放发音"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9ZM17 8c2 2 2 6 0 8M20 5c4 4 4 10 0 14" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div><p id="audio-status" class="audio-status" role="status">点单词或喇叭听英音</p></div>
+<progress id="audio-progress" class="audio-progress" value="0" max="1" aria-label="发音进度"></progress><p class="face-hint">点空白处翻面</p>
+</section>
+<section id="card-back" class="card-face card-back" aria-hidden="true" inert>
+<div class="card-meta"><span id="back-word" lang="en">cancel</span><span class="badge">例句</span></div>
+<div class="example-content"><p id="example" class="example" lang="en">We had to cancel our booking because the train stopped running.</p><p id="translation" class="translation">火车停运了，我们只好取消预订。</p><details id="word-extra" class="extra"><summary>释义与搭配</summary><p id="meaning"></p><p id="collocation" class="collocation" lang="en"></p><p id="note" class="note" hidden></p></details></div>
+<p class="face-hint">点空白处翻回正面</p>
+</section>
+</div>
+</div>
+<div id="card-actions" class="actions"><div class="ratings" role="group" aria-label="记忆状态"><button type="button" data-rating="unknown" aria-pressed="false">还不熟</button><button type="button" data-rating="known" aria-pressed="false">记住了</button></div><button id="flip" class="flip-button" type="button" aria-pressed="false" aria-controls="flip-inner">翻面看例句</button></div>
+<section id="summary-card" class="summary-card" hidden><h2 id="summary-title">本轮卡片已看完</h2><p id="summary-copy"></p><div class="summary-counts"><div><strong id="known-count">0</strong><span>记住了</span></div><div><strong id="unknown-count">0</strong><span>还不熟</span></div></div><button id="review" class="summary-action" type="button">复习不熟词</button><button id="browse-again" class="text-button" type="button">从第一张再看一遍</button></section>
+<nav class="navigation" aria-label="切换卡片"><button id="previous" class="nav-button" type="button" disabled>← 左滑上一张</button><button id="next" class="nav-button" type="button">右滑下一张 →</button></nav>
+<button id="finish" class="finish" type="button" hidden>结束本轮</button>
+<p id="notice" class="notice" role="status" aria-live="polite"></p><p id="storage-note" class="storage-note">进度保存在当前浏览器</p>
+<noscript><p class="error">请使用支持 JavaScript 的浏览器打开学习卡。</p></noscript><p id="boot-status" role="status">正在准备卡片…</p>
+</main>
+<script>window.DAILY_WORDS={"date":"2026-09-16","first":1,"last":50,"audioBase":"https://aha-moment-art.github.io/level-up-cards/audio/"};window.VOCAB_CONFIG={"words":[{"id":1,"word":"cancel","meaning":"取消， 废除； 抵消， 对消； 删去， 划掉","ukphone":"'kænsl","usphone":"'kænsl","collocation":"cancel a booking","example":"We had to cancel our booking because the train stopped running.","translation":"火车停运了，我们只好取消预订。","note":""},{"id":2,"word":"explosive","meaning":"爆炸的， 爆发的； 使人冲动的；爆炸物，炸药","ukphone":"ɪk'spləusɪv","usphone":"ɪk'splosɪv; ɪk'splozɪv","collocation":"explosive growth","example":"The town experienced explosive growth after the new railway opened.","translation":"新铁路开通后，这个城镇迅速发展。","note":""},{"id":3,"word":"prepare","meaning":"准备， 预备","ukphone":"prɪ'peə(r)","usphone":"prɪ'pɛr","collocation":"prepare for an exam","example":"Maya stayed home to prepare for her final exam.","translation":"玛雅留在家里准备期末考试。","note":""},{"id":4,"word":"crusade","meaning":"加入十字军， 投身正义运动；十字军；斗争，运动","ukphone":"kruː'seɪd","usphone":"kru'sed","collocation":"a crusade against waste","example":"The students began a crusade against food waste on campus.","translation":"学生们在校园发起了反对食物浪费的运动。","note":""},{"id":5,"word":"hamlet","meaning":"小村庄","ukphone":"'hæmlət","usphone":"'hæmlət","collocation":"a remote hamlet","example":"A narrow footpath connects the remote hamlet to the main road.","translation":"一条狭窄的小路把这个偏远村庄与大路连接起来。","note":""},{"id":6,"word":"surgeon","meaning":"外科医生","ukphone":"'sɜːdʒən","usphone":"'sɝdʒən","collocation":"a skilled surgeon","example":"The surgeon explained the procedure carefully before answering our questions.","translation":"外科医生仔细解释了手术流程，然后回答我们的问题。","note":""},{"id":7,"word":"hall","meaning":"门厅； 礼堂","ukphone":"hɔːl","usphone":"hɔl","collocation":"the entrance hall","example":"Please leave your wet umbrella in the entrance hall.","translation":"请把湿雨伞放在门厅。","note":""},{"id":8,"word":"discourage","meaning":"使泄气， 使灰心； 阻止， 劝阻","ukphone":"dɪs'kʌrɪdʒ","usphone":"dɪs'kɝɪdʒ","collocation":"discourage someone from doing","example":"One disappointing result should not discourage you from trying again.","translation":"一次令人失望的结果不该让你放弃再次尝试。","note":""},{"id":9,"word":"predispose","meaning":"事先影响某人； 偏爱； 易受感染","ukphone":"ˌpriːdɪ'spəuz","usphone":"'pridɪ'spoz","collocation":"predispose someone to","example":"Early success may predispose students to expect equally easy progress later.","translation":"早期的成功可能使学生倾向于期待以后也能轻松进步。","note":"常用义为“使倾向于；使易受某事影响”，不是主动“偏爱”。"},{"id":10,"word":"oversee","meaning":"监督， 监视； 俯瞰， 眺望","ukphone":"ˌəuvə'siː","usphone":"'ovɚ'si","collocation":"oversee a project","example":"An experienced engineer will oversee the bridge repair project.","translation":"一位经验丰富的工程师将监督桥梁维修项目。","note":"现代常用义是“监督、管理”；不宜将“俯瞰、眺望”作为常用义。"},{"id":11,"word":"pollution","meaning":"污染， 污染物； 玷污","ukphone":"pə'luːʃn","usphone":"pə'luʃən","collocation":"air pollution","example":"The city introduced cleaner buses to reduce air pollution.","translation":"这座城市引进了更清洁的公交车，以减少空气污染。","note":""},{"id":12,"word":"pretend","meaning":"装作， 假装","ukphone":"prɪ'tend","usphone":"prɪ'tɛnd","collocation":"pretend to be asleep","example":"I tried to pretend to be asleep when the children entered.","translation":"孩子们进来时，我试图装睡。","note":""},{"id":13,"word":"convection","meaning":"传送； 对流","ukphone":"kən'vekʃn","usphone":"kən'vɛkʃən","collocation":"convection currents","example":"The teacher used coloured water to demonstrate convection currents.","translation":"老师用有色水演示对流。","note":"核心义是“对流”，不是一般的“传送”。"},{"id":14,"word":"warrant","meaning":"保证；","ukphone":"'wɒrənt","usphone":"'wɔrənt","collocation":"warrant further investigation","example":"These unexpected results warrant further investigation before we publish.","translation":"这些意外结果值得进一步调查后再发表。","note":"补充动词“使有必要；使正当”，名词“搜查令、逮捕令；依据”。"},{"id":15,"word":"ecliptic","meaning":"【天】","ukphone":"ɪ'klɪptɪk","usphone":"ɪ'klɪptɪk","collocation":"the ecliptic plane","example":"The diagram shows Earth's orbit within the ecliptic plane.","translation":"这张图展示了地球在黄道平面内的轨道。","note":"补全：黄道；黄道的。"},{"id":16,"word":"conceal","meaning":"隐藏； 隐瞒； 掩盖","ukphone":"kən'siːl","usphone":"kən'sil","collocation":"conceal the truth","example":"The damaged label could not conceal the bottle's age.","translation":"破损的标签无法掩盖这个瓶子的年代。","note":""},{"id":17,"word":"overrate","meaning":"对…评价过高， 高估","ukphone":"ˌəuvə'reɪt","usphone":",ovɚ'ret","collocation":"overrate one's ability","example":"Beginners sometimes overrate their ability and choose routes that are too difficult.","translation":"初学者有时高估自己的能力，选择过于困难的路线。","note":""},{"id":18,"word":"meanwhile","meaning":"与此同时","ukphone":"'miːnwaɪl","usphone":"'minwaɪl","collocation":"meanwhile at home","example":"I watered the garden; meanwhile, my brother prepared lunch.","translation":"我给花园浇水；与此同时，弟弟准备午餐。","note":""},{"id":19,"word":"opulent","meaning":"豪华的， 华丽的， 富裕的； 丰富的， 丰饶的","ukphone":"'ɒpjələnt","usphone":"'ɑpjələnt","collocation":"an opulent interior","example":"The hotel's opulent interior contrasted with its plain stone exterior.","translation":"酒店豪华的内部与朴素的石质外观形成对比。","note":""},{"id":20,"word":"coincide","meaning":"同时发生； 一致","ukphone":"ˌkəuɪn'saɪd","usphone":",koɪn'saɪd","collocation":"coincide with","example":"My visit will coincide with the opening of the exhibition.","translation":"我到访的时间将恰逢展览开幕。","note":""},{"id":21,"word":"competent","meaning":"有能力的； 能胜任的","ukphone":"'kɒmpɪtnt","usphone":"'kɑmpɪtənt","collocation":"a competent manager","example":"We need a competent manager who can organise the new team.","translation":"我们需要一位能组织新团队的称职经理。","note":""},{"id":22,"word":"require","meaning":"需要； 命令； 规定， 要求","ukphone":"rɪ'kwaɪə(r)","usphone":"rɪ'kwaɪr","collocation":"require approval","example":"Changes to the timetable require approval from the course director.","translation":"课表调整需要课程主任批准。","note":""},{"id":23,"word":"scratch","meaning":"划伤，","ukphone":"skrætʃ","usphone":"skrætʃ","collocation":"scratch the surface","example":"Be careful not to scratch the surface of the wooden table.","translation":"小心别划伤木桌的表面。","note":""},{"id":24,"word":"compassionate","meaning":"有同情心的， 表示怜悯的","ukphone":"kəm'pæʃənət","usphone":"kəm'pæʃənət","collocation":"compassionate care","example":"The volunteers offered compassionate support to families after the flood.","translation":"洪水过后，志愿者为各家提供了充满关怀的支持。","note":""},{"id":25,"word":"cooperative","meaning":"合作的，协作的；合作社","ukphone":"kəu'ɒpərətɪv","usphone":"ko'ɑpərətɪv","collocation":"a cooperative approach","example":"A cooperative approach helped both teams finish the project early.","translation":"合作的方式帮助两个团队提前完成了项目。","note":""},{"id":26,"word":"strategist","meaning":"战略家","ukphone":"'strætədʒɪst","usphone":"'strætədʒɪst","collocation":"a skilled strategist","example":"The team's strategist adjusted the plan after studying the opposition.","translation":"团队的策略师研究对手后调整了计划。","note":""},{"id":27,"word":"irritable","meaning":"急躁的， 易怒的， 易受刺激的； 过敏的","ukphone":"'ɪrɪtəbl","usphone":"'ɪrɪtəbl","collocation":"feel irritable","example":"After a sleepless night, I felt irritable during the morning meeting.","translation":"一夜未眠后，我在早会上感到烦躁。","note":""},{"id":28,"word":"triple","meaning":"三部分的；三倍的；增至三倍","ukphone":"'trɪpl","usphone":"'trɪpl","collocation":"triple the amount","example":"We need to triple the amount of rice for tonight's guests.","translation":"为了今晚的客人，我们需要把米量增加到三倍。","note":""},{"id":29,"word":"reserved","meaning":"说话不多的， 内向的； 有所保留的， 预订的","ukphone":"rɪ'zɜːvd","usphone":"rɪ'zɝvd","collocation":"a reserved manner","example":"Although usually reserved, she spoke confidently about her research.","translation":"她通常话不多，但谈起自己的研究却很自信。","note":""},{"id":30,"word":"temper","meaning":"情绪；使缓和","ukphone":"'tempə(r)","usphone":"'tɛmpɚ","collocation":"lose one's temper","example":"He lost his temper when the printer jammed again.","translation":"打印机再次卡纸时，他发火了。","note":""},{"id":31,"word":"tickle","meaning":"发痒；使高兴，逗乐；痒","ukphone":"'tɪkl","usphone":"'tɪkl","collocation":"tickle someone's feet","example":"The children laughed as tiny waves began to tickle their feet.","translation":"小浪花开始挠孩子们的脚，他们笑了起来。","note":""},{"id":32,"word":"object","meaning":"反对， 不赞成；物体；对象；目标；宾语[əb'dʒekt]","ukphone":"'ɒbdʒɪkt","usphone":"'ɑbdʒɛkt","collocation":"object to a proposal","example":"Several residents object to the proposal because it removes public gardens.","translation":"几位居民反对该提议，因为它会取消公共花园。","note":""},{"id":33,"word":"accessible","meaning":"能接近的； 易达到的","ukphone":"ək'sesəbl","usphone":"ək'sɛsəbl","collocation":"easily accessible","example":"The museum is easily accessible by bus from the station.","translation":"从车站乘公交可以方便地到达博物馆。","note":""},{"id":34,"word":"hang","meaning":"悬挂， 吊， 垂下； 吊死， 绞死","ukphone":"hæŋ","usphone":"hæŋ","collocation":"hang a picture","example":"We will hang the picture above the living room sofa.","translation":"我们会把这幅画挂在客厅沙发上方。","note":""},{"id":35,"word":"authenticate","meaning":"鉴别， 证明","ukphone":"ɔː'θentɪkeɪt","usphone":"ɔ'θɛntɪket","collocation":"authenticate a painting","example":"Experts examined the pigments to authenticate the recently discovered painting.","translation":"专家检查颜料，以鉴定这幅新近发现画作的真伪。","note":""},{"id":36,"word":"suffice","meaning":"满足， 满意； 足够","ukphone":"sə'faɪs","usphone":"sə'faɪs","collocation":"suffice for","example":"Two small tables should suffice for our exhibition materials.","translation":"两张小桌子应该足够放我们的展览材料。","note":"常用义是“足够；满足需要”，不表示感到“满意”。"},{"id":37,"word":"concede","meaning":"承认； 让步","ukphone":"kən'siːd","usphone":"kən'sid","collocation":"concede a point","example":"She had to concede that the cheaper design was more practical.","translation":"她不得不承认，更便宜的设计更实用。","note":""},{"id":38,"word":"notable","meaning":"值得注意的；显著的，杰出的，显赫的；名人， 要人","ukphone":"'nəutəbl","usphone":"'notəbl","collocation":"a notable improvement","example":"There has been a notable improvement in the river's water quality.","translation":"河流水质有了显著改善。","note":""},{"id":39,"word":"unparalleled","meaning":"无双的， 无比的， 空前的","ukphone":"ʌn'pærəleld","usphone":"ʌn'pærəlɛld","collocation":"unparalleled access","example":"The archive offers researchers unparalleled access to the writer's private letters.","translation":"该档案馆为研究者提供了无与伦比的作家私人信件查阅条件。","note":""},{"id":40,"word":"plush","meaning":"豪华的，舒适的；长毛绒","ukphone":"plʌʃ","usphone":"plʌʃ","collocation":"a plush sofa","example":"We sank into a plush sofa beside the hotel fireplace.","translation":"我们坐进酒店壁炉旁柔软舒适的沙发里。","note":""},{"id":41,"word":"evaporate","meaning":"蒸发； 消失； 不复存在","ukphone":"ɪ'væpəreɪt","usphone":"ɪ'væpəret","collocation":"evaporate quickly","example":"Water will evaporate more quickly from a shallow open dish.","translation":"水从敞口浅盘中蒸发得更快。","note":""},{"id":42,"word":"commission","meaning":"委托；佣金；授权， 委托","ukphone":"kə'mɪʃn","usphone":"kə'mɪʃən","collocation":"commission a portrait","example":"The library plans to commission a portrait of its founder.","translation":"图书馆计划委托画家为创始人绘制肖像。","note":""},{"id":43,"word":"staircase","meaning":"楼梯","ukphone":"'steəkeɪs","usphone":"'stɛrkes","collocation":"a spiral staircase","example":"A narrow staircase leads to the apartment above the bakery.","translation":"一段狭窄的楼梯通向面包店楼上的公寓。","note":""},{"id":44,"word":"flip","meaning":"轻抛； 轻弹","ukphone":"flɪp","usphone":"flɪp","collocation":"flip a coin","example":"We decided to flip a coin to choose the first player.","translation":"我们决定抛硬币来选出第一个玩家。","note":""},{"id":45,"word":"connect","meaning":"连接， 衔接； 联合， 关联； 由…联想到； 给…接通电话","ukphone":"kə'nekt","usphone":"kə'nɛkt","collocation":"connect to a network","example":"You can connect your laptop to the library's wireless network.","translation":"你可以把笔记本电脑连接到图书馆的无线网络。","note":""},{"id":46,"word":"resume","meaning":"重新开始， 继续恢复","ukphone":"rɪ'zjuːm","usphone":"","collocation":"resume work","example":"The builders will resume work once the heavy rain stops.","translation":"大雨一停，建筑工人就会复工。","note":""},{"id":47,"word":"address","meaning":"致函，写姓名地址；向…讲话，演说；处理，","ukphone":"ə'dres","usphone":"əˈdrɛs;(for n)ˈædres; ædrɛs","collocation":"address a problem","example":"The new timetable should address the problem of overcrowded classrooms.","translation":"新课表应该能解决教室过于拥挤的问题。","note":""},{"id":48,"word":"posture","meaning":"姿势； 心情； 态度","ukphone":"'pɒstʃə(r)","usphone":"'pɑstʃɚ","collocation":"an upright posture","example":"The drawing class began with a study of the model's posture.","translation":"绘画课开始时，大家先研究模特的姿势。","note":""},{"id":49,"word":"spiral","meaning":"螺旋形的，盘旋的；盘旋上升；急剧增长；螺旋形；逐渐加速上升","ukphone":"'spaɪərəl","usphone":"'spaɪrəl","collocation":"spiral upwards","example":"Housing costs continued to spiral despite the slowdown in demand.","translation":"尽管需求放缓，住房成本仍持续急剧上涨。","note":""},{"id":50,"word":"decapitate","meaning":"斩首","ukphone":"dɪ'kæpɪteɪt","usphone":"dɪ'kæpɪtet","collocation":"decapitate a statue","example":"The museum records explain how vandals attempted to decapitate the statue.","translation":"博物馆的记录解释了破坏者如何企图砍掉雕像的头。","note":""}]};</script><script>(()=>{function restoreSession(ids, saved) {
+  const fresh = { signature: ids.join(','), mode: 'learn', queue: [...ids], cursor: 0, ratings: {} };
+  if (!saved || saved.signature !== fresh.signature) return fresh;
+  const validQueue = Array.isArray(saved.queue) && saved.queue.length > 0 &&
+    new Set(saved.queue).size === saved.queue.length && saved.queue.every(id => ids.includes(id));
+  const validMode = validQueue && (saved.mode === 'review' || (saved.mode === 'learn' && saved.queue.join(',') === fresh.signature));
+  if (!validQueue || !validMode || !Number.isInteger(saved.cursor) || saved.cursor < 0 || saved.cursor > saved.queue.length) return fresh;
+  const ratings = {};
+  for (const id of ids) if (['known', 'unknown'].includes(saved.ratings?.[id])) ratings[id] = saved.ratings[id];
+  return { ...fresh, mode: saved.mode, queue: [...saved.queue], cursor: saved.cursor, ratings };
+}
+
+function rateWord(session, rating) {
+  if (!['known', 'unknown'].includes(rating) || session.cursor >= session.queue.length) return session;
+  const id = session.queue[session.cursor];
+  return { ...session, cursor: session.cursor + 1, ratings: { ...session.ratings, [id]: rating } };
+}
+
+function reviewWords(session, ids) {
+  const queue = ids.filter(id => session.ratings[id] === 'unknown');
+  return queue.length ? { ...session, mode: 'review', queue, cursor: 0 } : session;
+}
+
+function moveCard(session, direction) {
+  if (direction !== -1 && direction !== 1) return session;
+  const cursor = Math.max(0, Math.min(session.queue.length - 1, session.cursor + direction));
+  return cursor === session.cursor ? session : { ...session, cursor };
+}
+
+function rememberWord(session, rating) {
+  if (!['known', 'unknown'].includes(rating) || session.cursor >= session.queue.length) return session;
+  return { ...session, ratings: { ...session.ratings, [session.queue[session.cursor]]: rating } };
+}
+
+// The requested direction is left = previous, right = next.
+function swipeDirection(dx, dy) {
+  return Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy) * 1.35 ? Math.sign(dx) : 0;
+}
+
+
+const config = window.DAILY_WORDS, $ = s => document.querySelector(s);
+const words = window.VOCAB_CONFIG.words.filter(w => w.id >= config.first && w.id <= config.last);
+const ids = words.map(w => w.id), byId = new Map(words.map(w => [w.id, w]));
+const sessionKey = `ielts-daily-session-v1:${config.date}`;
+const accentKey = 'ielts-daily-accent-v1', masteredKey = 'ielts-word-progress-v1';
+let storageOK = true;
+function read(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } }
+function write(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { storageOK = false; } }
+let session = restoreSession(ids, read(sessionKey, null));
+let accent = read(accentKey, 'uk') === 'us' ? 'us' : 'uk', flipped = false, serial = 0;
+let gesture = null, suppressClickUntil = 0, noticeTimer;
+const deck = $('#word-card'), inner = $('#flip-inner');
+let soundContext, soundNode, animationFrame; const decodedSounds = new Map();
+const label = () => accent === 'uk' ? '英音' : '美音';
+const current = () => byId.get(session.queue[session.cursor]);
+function save() {
+  write(sessionKey, session);
+  $('#storage-note').textContent = storageOK ? '进度保存在当前浏览器' : '当前浏览器无法保存进度，请保持此页打开';
+}
+function notice(text) {
+  clearTimeout(noticeTimer);
+  $('#notice').textContent = text;
+  noticeTimer = setTimeout(() => { $('#notice').textContent = ''; }, 1800);
+}
+function stopAudio() {
+  serial++;
+  if(soundNode){soundNode.onended=null;try{soundNode.stop();}catch{}soundNode.disconnect();soundNode=null;}
+  cancelAnimationFrame(animationFrame);
+  $('#audio-progress').value=0;
+  $('#audio-progress').dataset.state='idle';
+  $('#speaker').removeAttribute('aria-busy'); $('#word').removeAttribute('aria-busy');
+  $('#speaker').dataset.playing = 'false';
+}
+function prepareAudio() {
+  stopAudio();
+  document.querySelectorAll('[data-accent]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.accent === accent)));
+  const word = current(); if (!word) return;
+  const phone = accent === 'uk' ? word.ukphone : word.usphone;
+  $('#phonetic').textContent = phone ? `/${phone}/` : label();
+  $('#speaker').setAttribute('aria-label', `播放 ${word.word} ${label()}`);
+  $('#word').setAttribute('aria-label', `${word.word}，播放${label()}`);
+  $('#audio-status').textContent = `点单词或喇叭听${label()}`;
+}
+function setFlipped(value, immediate = false) {
+  flipped = value;
+  if (immediate) inner.classList.add('changing');
+  inner.classList.toggle('is-flipped', flipped);
+  $('#card-front').setAttribute('aria-hidden', String(flipped)); $('#card-front').inert = flipped;
+  $('#card-back').setAttribute('aria-hidden', String(!flipped)); $('#card-back').inert = !flipped;
+  $('#flip').textContent = flipped ? '翻回正面' : '翻面看例句';
+  $('#flip').setAttribute('aria-pressed', String(flipped));
+  deck.setAttribute('aria-label', `${current()?.word || '单词'} · ${flipped ? '例句面' : '单词面'}，空格翻面，左方向键上一张，右方向键下一张`);
+  if (immediate) requestAnimationFrame(() => requestAnimationFrame(() => inner.classList.remove('changing')));
+}
+function render(direction = 0) {
+  stopAudio();
+  const completed = session.cursor >= session.queue.length;
+  const known = ids.filter(id => session.ratings[id] === 'known').length, unknown = ids.filter(id => session.ratings[id] === 'unknown').length;
+  const size = session.queue.length;
+  $('#round-position').textContent = `${session.mode === 'review' ? '不熟词复习' : '今日单词'} · ${Math.min(session.cursor + 1, size)} / ${size}`;
+  $('#rating-count').textContent = `记住 ${known} · 还不熟 ${unknown}`;
+  $('#progress').setAttribute('aria-valuemax', String(size));
+  $('#progress').setAttribute('aria-valuenow', String(Math.min(session.cursor + 1, size)));
+  $('#progress-fill').style.width = `${Math.min(session.cursor + 1, size) / size * 100}%`;
+  deck.hidden = completed; $('#card-actions').hidden = completed; $('#summary-card').hidden = !completed;
+  $('#previous').disabled = session.cursor === 0; $('#next').disabled = completed || session.cursor >= size - 1;
+  $('#finish').hidden = completed || session.cursor !== size - 1;
+  $('#word-extra').open = false;
+  setFlipped(false, true);
+  if (completed) {
+    $('#summary-title').textContent = session.mode === 'review' ? '本轮复习结束' : '本轮卡片已看完';
+    const unmarked = ids.length - known - unknown;
+    $('#summary-copy').textContent = unknown ? `还有 ${unknown} 个词可以再巩固。` : unmarked ? `有 ${unmarked} 个词尚未标记记忆状态。` : '这组单词都记住了。';
+    $('#known-count').textContent = known; $('#unknown-count').textContent = unknown;
+    $('#review').hidden = unknown === 0; $('#review').textContent = `再练 ${unknown} 个不熟词`;
+  } else {
+    const word = current();
+    deck.dataset.wordId = word.id; $('#word').textContent = word.word;
+    $('#word-number').textContent = `原序号 ${String(word.id).padStart(3, '0')}`;
+    $('#back-word').textContent = word.word;
+    $('#word-badge').textContent = session.ratings[word.id] === 'known' ? '已记住' : session.ratings[word.id] === 'unknown' ? '还不熟' : '单词';
+    for (const field of ['meaning', 'collocation', 'translation', 'note']) $(`#${field}`).textContent = word[field] || '';
+    $('#note').hidden = !word.note;
+    const example = $('#example'), at = word.example.toLowerCase().indexOf(word.word.toLowerCase());
+    example.replaceChildren();
+    if (at < 0) example.textContent = word.example;
+    else {
+      const strong = document.createElement('strong'); strong.textContent = word.example.slice(at, at + word.word.length);
+      example.append(document.createTextNode(word.example.slice(0, at)), strong, document.createTextNode(word.example.slice(at + word.word.length)));
+    }
+    document.querySelectorAll('[data-rating]').forEach(b => b.setAttribute('aria-pressed', String(session.ratings[word.id] === b.dataset.rating)));
+    $('#card-front').scrollTop = 0; $('#card-back').scrollTop = 0;
+    prepareAudio();
+  }
+  deck.classList.remove('enter-next', 'enter-previous');
+  if (direction) { void deck.offsetWidth; deck.classList.add(direction > 0 ? 'enter-next' : 'enter-previous'); }
+  save();
+}
+function navigate(direction) {
+  const next = moveCard(session, direction);
+  if (next === session) { notice(direction < 0 ? '已经是第一张' : '已经是最后一张'); return; }
+  session = next; render(direction);
+}
+async function playCurrentWord(event) {
+  event?.stopPropagation();
+  const word=current();if(!word)return;
+  stopAudio();const ticket=serial;
+  $('#speaker').setAttribute('aria-busy','true');
+  $('#word').setAttribute('aria-busy','true');
+  $('#audio-status').textContent='正在准备'+label()+'…';
+  try {
+    const AudioAPI=window.AudioContext||window.webkitAudioContext;
+    if(!AudioAPI)throw Error('Audio unavailable');
+    if(!soundContext||soundContext.state==='closed')soundContext=new AudioAPI();
+    const resumed=soundContext.resume();
+    try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch{}
+    const key=String(word.id).padStart(4,'0')+'-'+accent;
+    let buffer=decodedSounds.get(key);
+    if(!buffer) {
+      const controller=new AbortController();
+      const deadline=setTimeout(()=>controller.abort(),15000);
+      let bytes;
+      try {
+        const response=await fetch(config.audioBase+key+'.mp3',{signal:controller.signal,credentials:'omit'});
+        if(!response.ok)throw Error('Pronunciation unavailable');
+        bytes=await response.arrayBuffer();
+      } finally {clearTimeout(deadline);}
+      if(ticket!==serial)return;
+      buffer=await soundContext.decodeAudioData(bytes);
+      decodedSounds.set(key,buffer);
+    }
+    await resumed;
+    if(ticket!==serial)return;
+    const node=soundContext.createBufferSource();node.buffer=buffer;node.connect(soundContext.destination);
+    soundNode=node;
+    const meter=$('#audio-progress');meter.max=buffer.duration;meter.value=0;meter.dataset.state='playing';
+    $('#speaker').removeAttribute('aria-busy');$('#word').removeAttribute('aria-busy');
+    $('#speaker').dataset.playing='true';$('#audio-status').textContent='正在播放'+label();
+    const began=soundContext.currentTime;
+    function tick(){if(ticket!==serial)return;meter.value=Math.min(buffer.duration,soundContext.currentTime-began);animationFrame=requestAnimationFrame(tick);}
+    node.onended=()=>{if(ticket!==serial)return;cancelAnimationFrame(animationFrame);meter.value=buffer.duration;meter.dataset.state='ended';$('#speaker').dataset.playing='false';$('#audio-status').textContent=label()+'已播放 · 可再次点读';node.disconnect();soundNode=null;};
+    node.start();tick();
+  } catch(error) {
+    if(ticket!==serial)return;
+    $('#speaker').removeAttribute('aria-busy');$('#word').removeAttribute('aria-busy');
+    $('#audio-progress').dataset.state='error';
+    $('#audio-status').textContent='声音未启动，请再点一次';
+  }
+}
+$('#speaker').addEventListener('click',playCurrentWord);$('#word').addEventListener('click',playCurrentWord);
+document.querySelectorAll('[data-accent]').forEach(b => b.addEventListener('click', () => { accent = b.dataset.accent; write(accentKey, accent); prepareAudio(); }));
+$('#flip').addEventListener('click', () => setFlipped(!flipped));
+deck.addEventListener('click', event => {
+  if (performance.now() < suppressClickUntil) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+  if (!event.target.closest('button, a, summary, details')) setFlipped(!flipped);
+}, true);
+deck.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); navigate(event.key === 'ArrowLeft' ? -1 : 1); }
+  else if (event.target === deck && [' ', 'Enter'].includes(event.key)) { event.preventDefault(); setFlipped(!flipped); }
+});
+deck.addEventListener('pointerdown', event => {
+  if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) { gesture = null; return; }
+  suppressClickUntil = 0;
+  gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, horizontal: false };
+});
+deck.addEventListener('pointermove', event => {
+  if (!gesture || event.pointerId !== gesture.id) return;
+  const dx = event.clientX - gesture.x, dy = event.clientY - gesture.y;
+  if (!gesture.horizontal && Math.abs(dy) > 14 && Math.abs(dy) > Math.abs(dx)) { gesture = null; return; }
+  if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+    gesture.horizontal = true;
+    if (!deck.hasPointerCapture(event.pointerId)) deck.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  }
+});
+deck.addEventListener('pointerup', event => {
+  if (!gesture || event.pointerId !== gesture.id) return;
+  const finished = gesture; gesture = null;
+  if (deck.hasPointerCapture(event.pointerId)) deck.releasePointerCapture(event.pointerId);
+  if (!finished.horizontal) return;
+  suppressClickUntil = performance.now() + 400; event.preventDefault();
+  const direction = swipeDirection(event.clientX - finished.x, event.clientY - finished.y);
+  if (direction) navigate(direction);
+});
+deck.addEventListener('pointercancel', () => { gesture = null; });
+// Touch starts with implicit capture on the child that was touched. Moving
+// capture to the deck emits a bubbling loss on that child; the gesture continues.
+deck.addEventListener('lostpointercapture', event => {
+  if (event.target === deck && event.pointerId === gesture?.id) gesture = null;
+});
+$('#previous').addEventListener('click', () => navigate(-1)); $('#next').addEventListener('click', () => navigate(1));
+document.querySelectorAll('[data-rating]').forEach(b => b.addEventListener('click', () => {
+  const word = current(); if (!word) return;
+  const saved = read(masteredKey, []), mastered = new Set(Array.isArray(saved) ? saved.filter(Number.isInteger) : []);
+  b.dataset.rating === 'known' ? mastered.add(word.id) : mastered.delete(word.id);
+  write(masteredKey, [...mastered]); session = rememberWord(session, b.dataset.rating);
+  document.querySelectorAll('[data-rating]').forEach(button => button.setAttribute('aria-pressed', String(button === b)));
+  $('#word-badge').textContent = b.dataset.rating === 'known' ? '已记住' : '还不熟';
+  const known = ids.filter(id => session.ratings[id] === 'known').length, unknown = ids.filter(id => session.ratings[id] === 'unknown').length;
+  $('#rating-count').textContent = `记住 ${known} · 还不熟 ${unknown}`; save();
+}));
+$('#finish').addEventListener('click', () => { session = { ...session, cursor: session.queue.length }; render(); });
+$('#review').addEventListener('click', () => { session = reviewWords(session, ids); render(); });
+$('#browse-again').addEventListener('click', () => { session = { ...session, mode: 'learn', queue: [...ids], cursor: 0 }; render(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { gesture = null; stopAudio(); } });
+if (words.length === 50) render();
+else $('.study').innerHTML = '<p class="error">词表未能载入，请刷新页面重试。</p>';
+
+$('#boot-status').hidden=true;
+})();</script></body>
+</html>
