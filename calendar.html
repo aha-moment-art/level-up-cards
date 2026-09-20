@@ -166,10 +166,12 @@ function playWord(event){
 }
 function navigate(direction){session=moveCard(session,direction);renderWord()}
 function link(text,url){const a=document.createElement('a');a.textContent=text;a.href=url;a.target='_blank';a.rel='noopener';return a}
+function revealSelectedDate(){const activeTab=tabs.find(b=>b.getAttribute('aria-selected')==='true');if(!activeTab)return;const dateBar=activeTab.parentElement;dateBar.scrollLeft=Math.max(0,activeTab.offsetLeft-dateBar.offsetLeft-(dateBar.clientWidth-activeTab.offsetWidth)/2)}
+window.addEventListener('resize',revealSelectedDate);
 function selectDate(date,updateURL=true){
  const next=data.days.find(d=>d.date===date);if(!next)return;stopSounds();day=next;ids=data.words.filter(w=>w.id>=day.first&&w.id<=day.last).map(w=>w.id);session=restoreSession(ids,read(key(),null));if(session.cursor>=session.queue.length)session.cursor=session.queue.length-1;
  tabs.forEach(b=>{const active=b.dataset.date===date;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1});
- const activeTab=tabs.find(b=>b.dataset.date===date),dateBar=activeTab.parentElement;dateBar.scrollLeft=Math.max(0,activeTab.offsetLeft-dateBar.offsetLeft-(dateBar.clientWidth-activeTab.offsetWidth)/2);
+ revealSelectedDate();
  $('#day-content').setAttribute('aria-labelledby',`date-${day.label}`);$('#day-label').textContent=`9 月 ${day.label} 日 · ${day.weekday}`;$('#day-slogan').textContent=day.title;
  $('#episodes').replaceChildren();day.episodes.forEach((episode,i)=>{
   const article=document.createElement('article');article.className='episode';
